@@ -8,7 +8,7 @@ Distributions.minimum(d::Flat) = -Inf
 Distributions.maximum(d::Flat) = +Inf
 
 # For vec support
-Distributions.rand(d::Flat, n::Int) = Vector([rand() for _ = 1:n])
+Distributions.rand(d::Flat, n::Int) = rand(n)
 Distributions.logpdf(d::Flat, x::Vector{T}) where T<:Real= zero(x)
 
 
@@ -26,5 +26,5 @@ Distributions.minimum(d::FlatPos) = d.l
 Distributions.maximum(d::FlatPos) = +Inf
 
 # For vec support
-Distributions.rand(d::FlatPos, n::Int) = Vector([rand() for _ = 1:n] .+ d.l)
-Distributions.logpdf(d::FlatPos, x::Vector{T}) where T<:Real = if any(x .<= d.l) -Inf else zero(x) end
+Distributions.rand(d::FlatPos{T}, n::Int) where {T<:Real} = rand(T, n) .+ d.l
+Distributions.logpdf(d::FlatPos, x::Vector{T}) where T<:Real = if any(x -> x <= d.l, x) -Inf else zero(x) end
