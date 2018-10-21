@@ -118,7 +118,7 @@ const AnySampler = Union{Nothing, AbstractSampler}
 
 include("utilities/resample.jl")
 @init @require Stan="682df890-35be-576f-97d0-3d8c8b33a550" @eval begin
-    include("support/stan-interface.jl")
+    include("utilities/stan-interface.jl")
 end
 include("utilities/helper.jl")
 include("utilities/robustinit.jl")
